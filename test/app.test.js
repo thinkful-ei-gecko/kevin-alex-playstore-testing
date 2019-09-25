@@ -50,6 +50,8 @@ describe('Playstore Test App', () => {
       .query({
         sort: 'App'
       })
+      .expect(200)
+      .expect('Content-Type', /json/)
       .then(res => {
         expect(res.body)
           .to.be.a('array')
