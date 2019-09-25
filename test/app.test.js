@@ -43,4 +43,19 @@ describe('Playstore Test App', () => {
         expect(res.body[1]).to.have.property('App', 'Block Puzzle');
       });
   });
+
+  it('returns 200 with an array of 20 objects, with 1st being "Angry Birds Rio" and last being "slither.io" when requesting sort by App', () => {
+    return supertest(app)
+      .get('/apps')
+      .query({
+        sort: 'App'
+      })
+      .then(res => {
+        expect(res.body)
+          .to.be.a('array')
+          .to.have.lengthOf(20);
+        expect(res.body[0]).to.have.property('App', 'Angry Birds Rio');
+        expect(res.body[res.body.length - 1]).to.have.property('App', 'slither.io');
+      });
+  });
 });
